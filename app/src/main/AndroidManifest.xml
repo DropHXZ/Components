@@ -21,6 +21,8 @@
         <activity android:name=".ui.BroadCastActivity"></activity>
 
         <service android:name=".server.SampleService"/>
+        <service android:name=".server.MyStartService"/>
+        <service android:name=".server.MyBindService"/>
     </application>
 
 </manifest>
