@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,7 +20,14 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     private Button btn_intent;
     private Button btn_stop_intent;
     private Button btn_service;
-    private Button btn_bind;
+    private Button btn_bind, btn_bind_stop;
+
+    private MyBindService myBindService = null;
+    private MyServiceConn mConn;
+    private MyBindService.MyBinder myBinder;
+
+    private boolean isRegister = false;
+    private Intent intent4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +42,14 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         btn_stop_intent = findViewById(R.id.btn_stop_intent);
         btn_service = findViewById(R.id.btn_service);
         btn_bind = findViewById(R.id.btn_bind);
+        btn_bind_stop = findViewById(R.id.btn_bind_stop);
         btn_intent.setOnClickListener(this);
         btn_stop_intent.setOnClickListener(this);
         btn_service.setOnClickListener(this);
         btn_bind.setOnClickListener(this);
+        btn_bind_stop.setOnClickListener(this);
+
+        mConn = new MyServiceConn();
     }
 
     @Override
@@ -56,24 +68,58 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
                 startService(intent2);
                 break;
             case R.id.btn_bind:
-                Intent intent4 = new Intent(this, MyBindService.class);
-                bindService(intent4, new MyServiceConn(), BIND_AUTO_CREATE);
+                if (intent4 == null) {
+                    intent4 = new Intent(this, MyBindService.class);
+                }
+                intent4.putExtra("param_bind", "P".getBytes());
+                isRegister = bindService(intent4, mConn, BIND_AUTO_CREATE);
+                break;
+            case R.id.btn_bind_stop:
+                if (intent4 != null && isRegister) {
+                    unbindService(mConn);
+                    isRegister = false;
+                }
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * 让activity和service产生联系
+     */
     public class MyServiceConn implements ServiceConnection {
-
+        /**
+         * Called when a connection to the Service has been established, with
+         * the {@link android.os.IBinder} of the communication channel to the
+         * Service.
+         *
+         * @param name    The concrete component name of the service that has
+         *                been connected.
+         * @param service The IBinder of the Service's communication channel,
+         *                which you can now make calls on.
+         */
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-
+            Log.i("service", "onServiceConnected");
+            myBindService = ((MyBindService.MyBinder) service).getService();
+            myBinder = (MyBindService.MyBinder) service;
+            myBinder.getService();
         }
 
+        /**
+         * Called when a connection to the Service has been lost.  This typically
+         * happens when the process hosting the service has crashed or been killed.
+         * This does <em>not</em> remove the ServiceConnection itself -- this
+         * binding to the service will remain active, and you will receive a call
+         * to {@link #onServiceConnected} when the Service is next running.
+         *
+         * @param name The concrete component name of the service whose
+         *             connection has been lost.
+         */
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            Log.i("service", "onServiceDisconnected");
         }
     }
 }

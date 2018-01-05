@@ -2,8 +2,10 @@ package com.base.components.server;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * 绑定式服务
@@ -12,10 +14,14 @@ import android.support.annotation.Nullable;
 
 public class MyBindService extends Service {
 
+    private MyBinder myBinder = new MyBinder();
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        byte[] bytes = intent.getByteArrayExtra("param_bind");
+        Log.d("service",bytes.toString());
+        return myBinder;
     }
 
     @Override
@@ -30,11 +36,21 @@ public class MyBindService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
+        Log.d("service","onUnbind");
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
+        Log.d("service","onDestroy");
         super.onDestroy();
+    }
+
+    public class MyBinder extends Binder {
+
+        public MyBindService getService() {
+            Log.i("service", "call1--------------");
+            return MyBindService.this;
+        }
     }
 }

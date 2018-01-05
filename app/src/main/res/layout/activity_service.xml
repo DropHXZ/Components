@@ -39,5 +39,12 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_service" />
+    <Button
+        android:id="@+id/btn_bind_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/btn_bind"
+        app:layout_constraintTop_toBottomOf="@id/btn_service"
+        android:text="stop"/>
 
 </android.support.constraint.ConstraintLayout>
