@@ -20,7 +20,7 @@ public class MyBindService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         byte[] bytes = intent.getByteArrayExtra("param_bind");
-        Log.d("service",bytes.toString());
+        Log.w("service","onBind");
         return myBinder;
     }
 
@@ -36,13 +36,13 @@ public class MyBindService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.d("service","onUnbind");
+        Log.w("service","onUnbind");
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
-        Log.d("service","onDestroy");
+        Log.w("service","onDestroy");
         super.onDestroy();
     }
 
@@ -51,6 +51,10 @@ public class MyBindService extends Service {
         public MyBindService getService() {
             Log.i("service", "call1--------------");
             return MyBindService.this;
+        }
+
+        public void getData(){
+
         }
     }
 }

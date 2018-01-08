@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.base.components.R;
+import com.base.components.server.ForeGroundService;
 import com.base.components.server.MyBindService;
 import com.base.components.server.MyStartService;
 import com.base.components.server.SampleService;
@@ -21,6 +22,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     private Button btn_stop_intent;
     private Button btn_service;
     private Button btn_bind, btn_bind_stop;
+    private Button btn_bind_foreground;
 
     private MyBindService myBindService = null;
     private MyServiceConn mConn;
@@ -43,11 +45,13 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         btn_service = findViewById(R.id.btn_service);
         btn_bind = findViewById(R.id.btn_bind);
         btn_bind_stop = findViewById(R.id.btn_bind_stop);
+        btn_bind_foreground = findViewById(R.id.btn_bind_foreground);
         btn_intent.setOnClickListener(this);
         btn_stop_intent.setOnClickListener(this);
         btn_service.setOnClickListener(this);
         btn_bind.setOnClickListener(this);
         btn_bind_stop.setOnClickListener(this);
+        btn_bind_foreground.setOnClickListener(this);
 
         mConn = new MyServiceConn();
     }
@@ -80,6 +84,11 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
                     isRegister = false;
                 }
                 break;
+            case R.id.btn_bind_foreground:
+                Intent intent3 = new Intent(this, ForeGroundService.class);
+                startService(intent3);
+//                startForegroundService(intent3);
+                break;
             default:
                 break;
         }
@@ -105,6 +114,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
             myBindService = ((MyBindService.MyBinder) service).getService();
             myBinder = (MyBindService.MyBinder) service;
             myBinder.getService();
+            myBinder.getData();
         }
 
         /**
