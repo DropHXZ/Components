@@ -28,7 +28,6 @@ import java.util.Map;
  */
 public class ContactActivity extends AppCompatActivity {
 
-    private ContentProvider cp;
     private ContentResolver cr;
     private List<PhoneInfo> listContact;
 

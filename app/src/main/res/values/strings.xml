@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Components</string>
-    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_contact">联系人</string>
+    <string name="title_activity_db">数据库操作</string>
 </resources>

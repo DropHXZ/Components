@@ -25,11 +25,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_hint" />
 
     <Button
-        android:id="@+id/btn_my"
+        android:id="@+id/btn_provider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
-        android:text="联系人"
+        android:text="ContentProvider"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_contact" />

@@ -8,9 +8,12 @@ import android.widget.Button;
 
 import com.base.components.R;
 
+/**
+ * ContentProvider ContentResolver
+ */
 public class ProviderActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn_contact;
+    private Button btn_contact, btn_provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,9 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
 
     private void initView() {
         btn_contact = findViewById(R.id.btn_contact);
+        btn_provider = findViewById(R.id.btn_provider);
         btn_contact.setOnClickListener(this);
+        btn_provider.setOnClickListener(this);
     }
 
     @Override
@@ -29,6 +34,9 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.btn_contact:
                 startActivity(new Intent(this, ContactActivity.class));
+                break;
+            case R.id.btn_provider:
+
                 break;
             default:
                 break;

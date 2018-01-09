@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 读短信权限 -->
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -35,15 +35,18 @@
         <service android:name=".server.MyStartService" />
         <service android:name=".server.MyBindService" />
         <service android:name=".server.ForeGroundService" />
+        <activity
+            android:name=".ui.ContactActivity"
+            android:label="@string/title_activity_contact"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.DBActivity"
+            android:label="@string/title_activity_db"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name=".provider.MyProvider"
             android:authorities="com.base.components" />
-
-        <activity
-            android:name=".ui.ContactActivity"
-            android:label="@string/title_activity_contact"
-            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -8,10 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
+ * 通过实现一个ContentProvider的抽象接口将自己的数据完全暴露出去
  * Created by admin on 2018/1/8.
  */
 
 public class MyProvider extends ContentProvider {
+
     @Override
     public boolean onCreate() {
         return false;
