@@ -1,6 +1,5 @@
 package com.base.components.ui;
 
-import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -64,6 +63,7 @@ public class ContactActivity extends AppCompatActivity {
     private void getContact() {
         cr = getContentResolver();
         listContact = new ArrayList<>();
+
         Uri uri = Uri.parse("content://com.android.contacts/raw_contacts");
         Cursor cursor_query = cr.query(uri, null, null, null, null);
         while (cursor_query.moveToNext()) {
@@ -102,7 +102,7 @@ public class ContactActivity extends AppCompatActivity {
             return;
         }
         if (contactAdapter == null) {
-            contactAdapter = new ContactAdapter(listContact,this);
+            contactAdapter = new ContactAdapter(listContact, this);
             recyclerView.setAdapter(contactAdapter);
         } else {
             contactAdapter.notifyDataSetChanged();

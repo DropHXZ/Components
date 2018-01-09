@@ -31,10 +31,8 @@
         <activity android:name=".ui.ProviderActivity" />
         <activity android:name=".ui.BroadCastActivity" />
 
-        <service android:name=".server.SampleService" />
-        <service android:name=".server.MyStartService" />
-        <service android:name=".server.MyBindService" />
-        <service android:name=".server.ForeGroundService" />
+
+        <activity android:name=".ui.DB2Activity"></activity>
         <activity
             android:name=".ui.ContactActivity"
             android:label="@string/title_activity_contact"
@@ -47,6 +45,11 @@
         <provider
             android:name=".provider.MyProvider"
             android:authorities="com.base.components" />
+
+        <service android:name=".server.SampleService" />
+        <service android:name=".server.MyStartService" />
+        <service android:name=".server.MyBindService" />
+        <service android:name=".server.ForeGroundService" />
     </application>
 
 </manifest>
