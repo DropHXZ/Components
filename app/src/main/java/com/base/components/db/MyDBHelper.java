@@ -13,12 +13,14 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     private static String DATABASE_NAME = "go_study.db";
     private static int DATABASE_VERSION = 1;
+    public static String TABLE_CONTACT = "t_contact";
 
     public static final String _ID = "_id";
 
-    public static String CREATE_STUDY_TABLE = "CREATE TABLE CONTACT(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+    public static String CREATE_STUDY_TABLE = "CREATE TABLE "+TABLE_CONTACT+
+            "(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             "name TEXT,age INTEGER,gender TEXT,phone TEXT)";
-    public static String DROP_STUDY_TABLE = "DROP TABLE IF EXISTS CONTACT";
+    public static String DROP_STUDY_TABLE = " DROP TABLE IF EXISTS "+TABLE_CONTACT;
 
     public MyDBHelper(Context context, SQLiteDatabase.CursorFactory factory) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);

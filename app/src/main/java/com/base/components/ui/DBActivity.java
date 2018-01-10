@@ -52,11 +52,23 @@ public class DBActivity extends AppCompatActivity {
         if (helper == null) {
             helper = new ContactDao(this);
         }
-
+        helper.queryInfo();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0x01 && resultCode == 0x02) {
+            data.getBundleExtra("bundle").get("name");
+            ContactBean bean = new ContactBean();
+            bean.setName(data.getBundleExtra("bundle").get("name").toString());
+            bean.setAge(data.getBundleExtra("bundle").get("age").toString());
+            bean.setGender(data.getBundleExtra("bundle").get("gender").toString());
+            bean.setPhone(data.getBundleExtra("bundle").get("phone").toString());
+            if (helper == null) {
+                helper = new ContactDao(this);
+            }
+            helper.insertInfo(bean);
+        }
     }
 }

@@ -35,8 +35,14 @@ public class DB2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (et_name.getText().length() != 0) {
                     Intent intent = new Intent();
-                    intent.putExtra("name", et_name.getText());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", et_name.getText().toString());
+                    bundle.putString("age", et_age.getText().toString());
+                    bundle.putString("gender", et_gender.getText().toString());
+                    bundle.putString("phone", et_phone.getText().toString());
+                    intent.putExtra("bundle",bundle);
                     setResult(0x02, intent);
+                    finish();
                 }
             }
         });
