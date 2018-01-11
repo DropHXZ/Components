@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.base.components.R;
+import com.base.components.adapter.Contact2Adapter;
 import com.base.components.bean.ContactBean;
 import com.base.components.db.ContactDao;
 
@@ -24,6 +25,7 @@ public class DBActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<ContactBean> contactBeanList;
     private ContactDao helper;
+    private Contact2Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,16 @@ public class DBActivity extends AppCompatActivity {
         if (helper == null) {
             helper = new ContactDao(this);
         }
-        helper.queryInfo();
+        contactBeanList = helper.queryInfo();
+        if (contactBeanList == null) {
+            return;
+        }
+        if (adapter == null) {
+            adapter = new Contact2Adapter(contactBeanList, this);
+            recyclerView.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

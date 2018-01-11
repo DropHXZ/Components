@@ -32,7 +32,7 @@ public class ContactDao {
         SQLiteDatabase sdb = helper.getWritableDatabase();
         sdb.beginTransaction();
         try {
-            sdb.delete(MyDBHelper.TABLE_CONTACT, null, null);
+//            sdb.delete(MyDBHelper.TABLE_CONTACT, null, null);
             if (bean != null) {
                 ContentValues values = new ContentValues();
                 values.put("name", bean.getName());
@@ -55,22 +55,20 @@ public class ContactDao {
      */
     public ArrayList<ContactBean> queryInfo() {
         SQLiteDatabase sdb = helper.getReadableDatabase();
-        sdb.beginTransaction();
         try {
             ArrayList<ContactBean> list = new ArrayList<>();
-            Cursor cursor = sdb.query(MyDBHelper.TABLE_CONTACT,null,null,null,null,null,null);
+            Cursor cursor = sdb.query(MyDBHelper.TABLE_CONTACT, null, null, null, null, null, null);
             if (!cursor.moveToFirst()) {
                 return null;
             }
-            while (cursor.moveToNext()) {
+            do {
                 ContactBean bean = new ContactBean();
                 bean.setName(cursor.getString(cursor.getColumnIndex("name")));
                 bean.setAge(cursor.getString(cursor.getColumnIndex("age")));
                 bean.setGender(cursor.getString(cursor.getColumnIndex("gender")));
                 bean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
                 list.add(bean);
-            }
-            sdb.endTransaction();
+            } while (cursor.moveToNext());
             sdb.close();
             return list;
         } catch (Exception e) {
